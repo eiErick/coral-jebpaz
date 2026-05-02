@@ -120,3 +120,39 @@
         }
     }
 }
+
+/* features/home/home.component.scss */
+
+@media print {
+
+    /* 1. Esconder tudo que não é o painel de preview */
+    app-header,
+    .fab-container,
+    .empty-state,
+    app-bloco,
+    /* Esconde os editores de bloco */
+    button {
+        display: none !important;
+    }
+
+    /* 2. Resetar o layout da Home para que o preview ocupe a tela toda */
+    .blocks-container {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    .preview-panel {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    /* 3. Remover fundos cinzas e sombras para economizar tinta/toner */
+    body {
+        background: white !important;
+        margin: 0 !important;
+    }
+}

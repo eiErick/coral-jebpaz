@@ -1,0 +1,21 @@
+<div class="paper-wrap" [ngStyle]="cssVariables()">
+    @for (page of pagedBlocks(); track $index) {
+    <div class="page" #pageElement>
+
+        @if ($index === 0) {
+        <div class="header">
+            <div class="titulo-geral">{{ title() }}</div>
+            <div class="titulo-coral">MINISTÉRIO DE MÚSICA JEBPAZ</div>
+        </div>
+        }
+
+        <div class="content">
+            @for (block of page; track block.id) {
+            <div class="doc-block" [ngClass]="block.type">
+                {{ block.content }}
+            </div>
+            }
+        </div>
+    </div>
+    }
+</div>

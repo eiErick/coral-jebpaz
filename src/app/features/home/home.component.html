@@ -9,6 +9,11 @@
     } @empty {
     <p class="empty-state">Clique no botão "+" para adicionar uma seção, verso ou refrão.</p>
     }
+
+    <section class="preview-panel">
+        <app-preview-page #page [title]="headerConfig().title" [color]="headerConfig().color"
+            [columns]="headerConfig().columns" [fontSize]="headerConfig().fontSize" [blocks]="blocks()" />
+    </section>
 </main>
 
 <div class="fab-container">

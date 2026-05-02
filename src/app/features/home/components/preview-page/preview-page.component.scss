@@ -1,0 +1,126 @@
+// features/home/components/preview-page/preview-page.component.scss
+.paper-wrap {
+    display: flex;
+    flex-direction: column; // Páginas uma embaixo da outra
+    align-items: center;
+    gap: 20px;
+    padding: var(--spacing-lg);
+    background: var(--color-neutral-200);
+
+    .page {
+        width: 210mm;
+        height: 297mm; // Altura A4 fixa obrigatória
+        background: #fff;
+        padding: 15mm 14mm 16mm 14mm;
+        box-shadow: var(--shadow-3);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        box-sizing: border-box;
+
+        .header {
+            flex-shrink: 0; // Não deixa o header encolher
+            margin-bottom: 8mm;
+            // ... estilos de títulos mantidos ...
+        }
+
+        .titulo-geral {
+            font-size: var(--title-font);
+            line-height: 1.05;
+            text-transform: uppercase;
+            color: var(--title-color);
+            font-weight: 700;
+            text-decoration: underline;
+            margin: 0 0 3mm 0;
+            white-space: pre-wrap;
+        }
+
+        .titulo-coral {
+            font-size: var(--coral-font);
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--title-color);
+            font-weight: 700;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+    }
+
+    .content {
+        flex-grow: 1;
+        column-count: var(--columns);
+        column-gap: 10mm;
+        column-fill: auto; // Crucial: preenche a primeira coluna antes da segunda
+        overflow: hidden; // Esconde o transbordo para o TS medir
+
+        // Altura máxima permitida para o conteúdo dentro da página
+        max-height: 100%;
+
+        .doc-block {
+            break-inside: avoid; // Não quebra um bloco no meio das colunas
+            margin-bottom: 4.5mm;
+            font-size: var(--base-font);
+            line-height: 1.2;
+            white-space: pre-wrap;
+
+            &.section {
+                color: var(--title-color);
+                font-weight: 700;
+                text-transform: uppercase;
+                border-bottom: 1px solid var(--title-color);
+            }
+
+            &.chorus {
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+// Responsividade para mobile: o papel escala para caber na tela [cite: 122]
+@media (max-width: 768px) {
+    .paper-wrap {
+        padding: var(--spacing-xs);
+
+        .page {
+            width: 100%;
+            min-height: auto;
+            padding: 10mm;
+        }
+    }
+}
+
+@media print {
+    @page {
+        /* Define margem zero para remover cabeçalhos/rodapés automáticos */
+        margin: 0;
+    }
+
+    body {
+        /* Como resetamos a margem da página, precisamos garantir que o 
+       conteúdo não cole na borda física do papel */
+        padding: 0;
+        margin: 0;
+    }
+
+    .paper-wrap {
+        padding: 0 !important;
+        background: none !important;
+        display: block !important;
+    }
+
+    .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        /* Remove a sombra do papel no PDF */
+        width: 100% !important;
+        height: 100vh !important;
+        /* Garante que ocupe a folha toda */
+        page-break-after: always;
+        /* FORÇA o PDF a criar uma nova página aqui */
+
+        /* Otimização para impressão de cores */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
