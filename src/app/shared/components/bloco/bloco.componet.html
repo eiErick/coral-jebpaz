@@ -1,0 +1,16 @@
+<div class="block-card" [style.border-left-color]="getBlockColor()">
+  <div class="block-actions">
+    <span class="block-label">{{ type().toUpperCase() }}</span>
+    <div class="btn-group">
+      <button (click)="move.emit('up')">↑</button>
+      <button (click)="move.emit('down')">↓</button>
+      <button class="btn-danger" (click)="handleDelete()">Excluir</button>
+    </div>
+  </div>
+  
+  <textarea 
+    [value]="content()"
+    (input)="onTextChange($event)"
+    placeholder="Digite o texto aqui...">
+  </textarea>
+</div>

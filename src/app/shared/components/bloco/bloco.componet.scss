@@ -1,0 +1,91 @@
+.block-card {
+    background: var(--color-neutral-0);
+    border-radius: var(--radius-md);
+    border-left: 6px solid; // Cor dinâmica via [style]
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    transition: transform 0.2s ease;
+
+    &:active {
+        transform: scale(0.99);
+    }
+
+    .block-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-xs);
+
+        .block-label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: var(--spacing-xs);
+
+            button {
+                background: var(--color-neutral-100);
+                border: none;
+                padding: 6px 10px;
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+                font-weight: var(--font-weight-medium);
+                color: var(--color-text-primary);
+
+                &:hover {
+                    background: var(--color-neutral-200);
+                }
+
+                &.btn-danger {
+                    background: var(--color-error);
+                    color: var(--color-text-inverse);
+
+                    &.confirming {
+                        animation: pulse 1s infinite;
+                    }
+                }
+            }
+        }
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-sm);
+        padding: var(--spacing-sm);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-md);
+        line-height: var(--line-height-normal);
+        color: var(--color-text-primary);
+        resize: vertical;
+        outline: none;
+
+        &:focus {
+            border-color: var(--color-primary-300);
+            box-shadow: 0 0 0 2px var(--color-primary-50);
+        }
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,20 @@
+<header class="header">
+    <input type="text" [value]="title" (input)="titleChange.emit($any($event.target).value)" placeholder="Título" />
+
+    <input type="color" [value]="color" (input)="colorChange.emit($any($event.target).value)" />
+
+    <select [value]="columns" (change)="columnsChange.emit($any($event.target).value)">
+        <option [value]="1">1 coluna</option>
+        <option [value]="2">2 colunas</option>
+    </select>
+
+    <select [value]="fontSize" (change)="fontSizeChange.emit(+$any($event.target).value)">
+        <option *ngFor="let size of fontSizes" [value]="size">
+            {{ size }}pt
+        </option>
+    </select>
+
+    <button (click)="exportPdf.emit()">
+        Exportar PDF
+    </button>
+</header>

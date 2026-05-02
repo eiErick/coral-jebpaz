@@ -1,0 +1,32 @@
+<app-header [title]="headerConfig().title" [color]="headerConfig().color" [columns]="headerConfig().columns"
+    [fontSize]="headerConfig().fontSize" (titleChange)="onTitleChange($event)" (colorChange)="onColorChange($event)"
+    (columnsChange)="onColumnsChange($event)" (fontSizeChange)="onFontSizeChange($event)" (exportPdf)="onExportPdf()" />
+
+<main class="blocks-container">
+    @for (block of blocks(); track block.id) {
+    <app-bloco [type]="block.type" [content]="block.content" (move)="onMoveBlock(block.id, $event)"
+        (delete)="onDeleteBlock(block.id)" (contentChange)="onUpdateBlockContent(block.id, $event)" />
+    } @empty {
+    <p class="empty-state">Clique no botão "+" para adicionar uma seção, verso ou refrão.</p>
+    }
+</main>
+
+<div class="fab-container">
+    <button class="fab" (click)="toggleMenu()">
+        +
+    </button>
+
+    @if (isMenuOpen()) {
+    <div class="menu">
+
+        <button (click)="onAction('titulo')">Título da seção</button>
+        <button (click)="onAction('verso')">Verso</button>
+        <button (click)="onAction('refrao')">Refrão</button>
+
+        <button class="danger" (click)="onAction('restaurar')">
+            Restaurar
+        </button>
+
+    </div>
+    }
+</div>
