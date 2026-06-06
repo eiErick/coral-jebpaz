@@ -3,7 +3,6 @@ import { HomeService } from './home.service';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { BlockType } from './types/block.type';
 import { BlockItemComponent } from "../../shared/components/bloco/bloco.component";
-import { ExportPdfService } from '../export-pdf/export-pdf.service';
 import { PreviewPageComponent } from "./components/preview-page/preview-page.component";
 
 type MenuAction = 'titulo' | 'verso' | 'refrao' | 'restaurar';
@@ -19,7 +18,6 @@ export class HomeComponent {
     @ViewChild('page', { read: ElementRef }) page!: ElementRef;
 
     private homeService = inject(HomeService);
-    private exportService = inject(ExportPdfService);
 
     public blocks = this.homeService.blocks;
 
@@ -111,14 +109,6 @@ export class HomeComponent {
     public onFontSizeChange(value: number): void {
         this.homeService.setFontSize(value);
     }
-
-    // public onExportPdf(): void {
-    //     const nodes = this.page.nativeElement.childNodes[0].childNodes;
-    //     const last = nodes[nodes.length - 1];
-    //     last?.remove();
-
-    //     this.exportService.exportElements(nodes);
-    // }
 
     public onExportPdf(): void {
         window.print();

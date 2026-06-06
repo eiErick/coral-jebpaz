@@ -1,3 +1,4 @@
+// features/home/components/bloco/bloco.component.scss
 .block-card {
     background: var(--color-neutral-0);
     border-radius: var(--radius-md);
@@ -7,10 +8,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
 
-    &:active {
-        transform: scale(0.99);
+    &:hover {
+        box-shadow: var(--shadow-2);
     }
 
     .block-actions {
@@ -19,12 +20,30 @@
         align-items: center;
         margin-bottom: var(--spacing-xs);
 
-        .block-label {
+        .type-select {
+            background: var(--color-neutral-100);
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            padding: 4px 8px;
             font-size: var(--font-size-xs);
             font-weight: var(--font-weight-bold);
             color: var(--color-text-secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+                border-color: var(--color-primary-300);
+                background: var(--color-neutral-0);
+            }
+
+            option {
+                text-transform: uppercase;
+                font-weight: normal;
+                background: var(--color-neutral-0);
+            }
         }
 
         .btn-group {
@@ -34,21 +53,32 @@
             button {
                 background: var(--color-neutral-100);
                 border: none;
-                padding: 6px 10px;
+                padding: 6px 12px;
                 border-radius: var(--radius-sm);
                 cursor: pointer;
                 font-weight: var(--font-weight-medium);
                 color: var(--color-text-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
                 &:hover {
                     background: var(--color-neutral-200);
                 }
 
                 &.btn-danger {
-                    background: var(--color-error);
-                    color: var(--color-text-inverse);
+                    background: var(--color-neutral-100);
+                    color: var(--color-error);
+                    border: 1px solid transparent;
+
+                    &:hover {
+                        background: var(--color-error);
+                        color: white;
+                    }
 
                     &.confirming {
+                        background: var(--color-error);
+                        color: white;
                         animation: pulse 1s infinite;
                     }
                 }
@@ -58,34 +88,27 @@
 
     textarea {
         width: 100%;
-        min-height: 100px;
+        min-height: 80px;
         border: 1px solid var(--color-neutral-200);
         border-radius: var(--radius-sm);
         padding: var(--spacing-sm);
-        font-family: var(--font-family-base);
+        font-family: inherit;
         font-size: var(--font-size-md);
-        line-height: var(--line-height-normal);
+        line-height: 1.4;
         color: var(--color-text-primary);
         resize: vertical;
         outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
 
         &:focus {
-            border-color: var(--color-primary-300);
-            box-shadow: 0 0 0 2px var(--color-primary-50);
+            border-color: var(--color-primary-400);
+            box-shadow: 0 0 0 3px var(--color-primary-50);
         }
     }
 }
 
 @keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); }
 }

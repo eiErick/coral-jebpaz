@@ -1,0 +1,19 @@
+jebpaz coral
+
+deve poder inserir refrão
+deve poder inserir verso
+deve poder inserir título do coral
+deve poder inserir titulo geral
+deve poder alterar a cor de todos os titilos de uma vez
+deve poder negritar o refrão
+deve ter o titulo sublinhado
+deve poder aumentar e diminuir o tamanho das fontes
+deve ser em fonte arial
+deve poder dividir a folha em colunas
+deve poder exporta em pdf
+deve pensar projetar todo o layout para folha a4 vertial
+
+UI e UX
+
+
+

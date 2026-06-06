@@ -1,126 +1,94 @@
-// features/home/components/preview-page/preview-page.component.scss
-.paper-wrap {
+.workspace {
     display: flex;
-    flex-direction: column; // Páginas uma embaixo da outra
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: var(--spacing-lg);
-    background: var(--color-neutral-200);
+    background: #eaeded;
+    padding: 20px;
+    min-height: 100vh;
 
-    .page {
-        width: 210mm;
-        height: 297mm; // Altura A4 fixa obrigatória
-        background: #fff;
-        padding: 15mm 14mm 16mm 14mm;
-        box-shadow: var(--shadow-3);
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        box-sizing: border-box;
+    .btn-pdf {
+        padding: 10px 20px;
+        background: #2980b9;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
-        .header {
-            flex-shrink: 0; // Não deixa o header encolher
-            margin-bottom: 8mm;
-            // ... estilos de títulos mantidos ...
-        }
-
-        .titulo-geral {
-            font-size: var(--title-font);
-            line-height: 1.05;
-            text-transform: uppercase;
-            color: var(--title-color);
-            font-weight: 700;
-            text-decoration: underline;
-            margin: 0 0 3mm 0;
-            white-space: pre-wrap;
-        }
-
-        .titulo-coral {
-            font-size: var(--coral-font);
-            line-height: 1.1;
-            text-transform: uppercase;
-            color: var(--title-color);
-            font-weight: 700;
-            margin: 0;
-            white-space: pre-wrap;
-        }
-    }
-
-    .content {
-        flex-grow: 1;
-        column-count: var(--columns);
-        column-gap: 10mm;
-        column-fill: auto; // Crucial: preenche a primeira coluna antes da segunda
-        overflow: hidden; // Esconde o transbordo para o TS medir
-
-        // Altura máxima permitida para o conteúdo dentro da página
-        max-height: 100%;
-
-        .doc-block {
-            break-inside: avoid; // Não quebra um bloco no meio das colunas
-            margin-bottom: 4.5mm;
-            font-size: var(--base-font);
-            line-height: 1.2;
-            white-space: pre-wrap;
-
-            &.section {
-                color: var(--title-color);
-                font-weight: 700;
-                text-transform: uppercase;
-                border-bottom: 1px solid var(--title-color);
-            }
-
-            &.chorus {
-                font-weight: 700;
-            }
+        &:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
         }
     }
 }
 
-// Responsividade para mobile: o papel escala para caber na tela [cite: 122]
-@media (max-width: 768px) {
-    .paper-wrap {
-        padding: var(--spacing-xs);
+// FORMATO BASE DA PÁGINA (A4)
+.page-container {
+    width: 210mm;
+    min-height: 297mm; // Mantém a proporção visual do papel, mas permite crescer se necessário
+    background: #ffffff;
+    padding: 18mm 15mm;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
 
-        .page {
-            width: 100%;
-            min-height: auto;
-            padding: 10mm;
+    .header {
+        margin-bottom: 8mm;
+    }
+
+    .titulo-geral {
+        font-size: var(--title-font);
+        line-height: 1.1;
+        text-transform: uppercase;
+        color: var(--title-color);
+        font-weight: 700;
+        text-decoration: underline;
+        margin: 0;
+        white-space: pre-wrap;
+    }
+
+    // O CONTAINER QUE FAZ A DIVISÃO NO MEIO IMEDIATA
+    .content-flow {
+        width: 100%;
+        font-size: var(--base-font);
+        line-height: 1.35;
+
+        &.dual-columns {
+            column-count: 2; 
+            column-gap: 12mm; 
+            
+            // ISSO FAZ O QUE VOCÊ QUER: Pega o texto e racha no meio certinho,
+            // distribuindo metade para a esquerda e metade para a direita imediatamente.
+            column-fill: balance !important; 
         }
     }
 }
 
-@media print {
-    @page {
-        /* Define margem zero para remover cabeçalhos/rodapés automáticos */
-        margin: 0;
+// ESTILIZAÇÃO DOS BLOCOS (MÚSICAS, REFRÕES, SEÇÕES)
+.doc-block {
+    margin-bottom: 6mm;
+    white-space: pre-wrap;
+    
+    // Evita que uma única estrofe seja cortada ao meio na divisão das colunas
+    break-inside: avoid;
+    page-break-inside: avoid;
+
+    &.section {
+        font-size: var(--section-font);
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: underline;
+        color: var(--title-color);
+        margin-top: 4mm;
+        break-after: avoid;
     }
 
-    body {
-        /* Como resetamos a margem da página, precisamos garantir que o 
-       conteúdo não cole na borda física do papel */
-        padding: 0;
-        margin: 0;
-    }
-
-    .paper-wrap {
-        padding: 0 !important;
-        background: none !important;
-        display: block !important;
-    }
-
-    .page {
-        margin: 0 !important;
-        box-shadow: none !important;
-        /* Remove a sombra do papel no PDF */
-        width: 100% !important;
-        height: 100vh !important;
-        /* Garante que ocupe a folha toda */
-        page-break-after: always;
-        /* FORÇA o PDF a criar uma nova página aqui */
-
-        /* Otimização para impressão de cores */
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+    &.chorus {
+        font-weight: 700;
+        border-left: 2.5px solid var(--title-color);
+        padding-left: 3mm;
     }
 }

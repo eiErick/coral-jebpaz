@@ -1,6 +1,6 @@
 import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlockType, EditableBlock } from '../../../features/home/types/block.type';
+import { BlockType } from '../../../features/home/types/block.type';
 
 @Component({
     selector: 'app-bloco',
@@ -10,21 +10,26 @@ import { BlockType, EditableBlock } from '../../../features/home/types/block.typ
     styleUrls: ['./bloco.componet.scss']
 })
 export class BlockItemComponent {
-    // Inputs usando Signals
     public type = input.required<BlockType>();
     public content = input.required<string>();
 
-    // Outputs para comunicação com o Smart Component
     public move = output<'up' | 'down'>();
     public delete = output<void>();
     public contentChange = output<string>();
+    // Novo Output para mudança de tipo
+    public typeChange = output<BlockType>();
 
-    // Estado interno para controle de confirmação de exclusão
     public isConfirmingDelete = signal<boolean>(false);
 
     public onTextChange(event: Event): void {
         const textarea = event.target as HTMLTextAreaElement;
         this.contentChange.emit(textarea.value);
+    }
+
+    // Método para capturar a mudança no Select
+    public onTypeChange(event: Event): void {
+        const select = event.target as HTMLSelectElement;
+        this.typeChange.emit(select.value as BlockType);
     }
 
     public handleDelete(): void {
@@ -33,7 +38,6 @@ export class BlockItemComponent {
             this.isConfirmingDelete.set(false);
         } else {
             this.isConfirmingDelete.set(true);
-            // Opcional: resetar confirmação após 3 segundos
             setTimeout(() => this.isConfirmingDelete.set(false), 3000);
         }
     }
@@ -42,7 +46,7 @@ export class BlockItemComponent {
         switch (this.type()) {
             case 'section': return 'var(--color-primary-500)';
             case 'chorus': return 'var(--color-warning)';
-            case 'verse': return 'var(--color-neutral-400)';
+            case 'verse': return 'var(--color-neutral-500)';
             default: return 'var(--color-neutral-200)';
         }
     }

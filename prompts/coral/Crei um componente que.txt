@@ -1,0 +1,5 @@
+Crei um componente que deve ficar na home, ele será um container para blocos editáveis
+- Cada bloco é carregado com com um clique em refão, verso ou titulo de seção;
+- Esses blocos tem opção de mover para cima ou para baixo na lista de blocos;
+- deve ter um botão com dupla confirmação de exclusão;
+- deve ter um campo textarea onde vai todo texto que eu quiser colocar;

@@ -1,0 +1,2 @@
+Agora no home deve ter todos os controladores para a header
+- O titulo, cor e fontes deve ficar salvos em uma service

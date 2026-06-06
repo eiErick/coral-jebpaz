@@ -1,0 +1,6 @@
+Eu preciso de um componente header que tenha:
+1. input para inserir título geral;
+2. input para definir cor;
+3. select com duas opçãoes (1 coluna e 2 colunas) de quantidade de coluna;
+4. select com opção de tamanho de fonte
+5. botão de exportar pdf

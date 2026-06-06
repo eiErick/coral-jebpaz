@@ -1,0 +1,9 @@
+Implemente na home
+- botão sempre fixo de add que ao clicar exibi "titulo da seção", "verso", "refrão" e "restaurar" (esse ultimo em vermelho com verificação dupla de ação)
+- Os menus deve ser flutoantes;
+- Os menus só deve exibir ao clicar no botão;
+- Ao clicar fora, esc ou qualquer ação parecida, deve fechar o menu
+
+<app-header [title]="headerConfig().title" [color]="headerConfig().color" [columns]="headerConfig().columns"
+    [fontSize]="headerConfig().fontSize" (titleChange)="onTitleChange($event)" (colorChange)="onColorChange($event)"
+    (columnsChange)="onColumnsChange($event)" (fontSizeChange)="onFontSizeChange($event)" (exportPdf)="onExportPdf()" />
